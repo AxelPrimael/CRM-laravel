@@ -36,7 +36,7 @@ public function store(Request $request)
 {
     $request->validate([
         'name'  => 'required',
-        'email' => 'required|email',
+        'email' => 'required|email|unique:contacts,email',
         'phone' => 'nullable',
         'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
     ]);
