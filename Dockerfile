@@ -32,4 +32,4 @@ RUN sed -i 's|<Directory /var/www/>|<Directory /var/www/html/public>|' /etc/apac
 
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+CMD sh -c "php artisan config:clear && php artisan migrate --force && apache2-foreground"
