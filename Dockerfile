@@ -1,9 +1,9 @@
 FROM php:8.4-apache
 
-# Installation des dépendances PHP
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
+    curl \
     libzip-dev \
     libpq-dev \
     && docker-php-ext-install \
@@ -13,29 +13,29 @@ RUN apt-get update && apt-get install -y \
     zip \
     && rm -rf /var/lib/apt/lists/*
 
-# Installation de Composer
+# Node.js pour Vite
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs
+
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Dossier de travail Laravel
 WORKDIR /var/www/html
 
-# Copie du projet
 COPY . .
 
-# Installation des dépendances Laravel
+# PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Lien symbolique storage
+# Frontend dependencies + build Vite
+RUN npm install
+RUN npm run build
+
 RUN php artisan storage:link || true
 
-# Permissions Laravel
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Activation Apache Rewrite
-# Activation Apache Rewrite
 RUN a2enmod rewrite
 
-# Configuration Apache Laravel
 RUN cat <<EOF > /etc/apache2/sites-available/000-default.conf
 <VirtualHost *:80>
     DocumentRoot /var/www/html/public
