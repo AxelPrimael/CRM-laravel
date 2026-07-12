@@ -17,7 +17,7 @@
         <style>
             /* On applique le fond sur une classe dédiée pour plus de propreté */
             .bg-crm {
-                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{ asset('images/zoo.jpg') }}");
+                background-image: url("{{ asset('images/zoo.jpg') }}");
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
