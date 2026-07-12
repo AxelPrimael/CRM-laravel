@@ -25,6 +25,11 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 
 RUN a2enmod rewrite
 
+# Configuration Apache vers Laravel public/
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
+
+RUN sed -i 's|<Directory /var/www/>|<Directory /var/www/html/public>|' /etc/apache2/apache2.conf
+
 EXPOSE 80
 
 CMD ["apache2-foreground"]
