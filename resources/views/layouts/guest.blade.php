@@ -13,26 +13,35 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased" style="
-    min-height:100vh;
-    width:100%;
-    background-image:url('./images/zoo.jpg');
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-" >
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+        <style>
+            /* On applique le fond sur une classe dédiée pour plus de propreté */
+            .bg-crm {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{ asset('images/zoo.jpg') }}");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }
+        </style>
+    </head>
+    <body class="font-sans text-gray-900 antialiased">
+        
+        <!-- On enlève "bg-gray-100" et on ajoute notre classe "bg-crm" -->
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-crm">
+            
+            <!-- Logo (Optionnel) -->
+            <div class="mb-4">
+                <a href="/">
+                    <h1 class="text-white text-3xl font-bold shadow-sm">MON CRM</h1>
+                </a>
+            </div>
+
+            <!-- Carte de connexion -->
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-xl overflow-hidden sm:rounded-lg border border-gray-200 dark:border-gray-700">
                 {{ $slot }}
             </div>
         </div>
-
-
 
     </body>
 </html>
