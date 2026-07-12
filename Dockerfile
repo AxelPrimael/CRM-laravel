@@ -32,10 +32,12 @@ RUN php artisan storage:link || true
 RUN chown -R www-data:www-data storage bootstrap/cache
 
 # Activation Apache Rewrite
+# Activation Apache Rewrite
 RUN a2enmod rewrite
 
-# Configuration Apache pour Laravel (dossier public)
-RUN echo '<VirtualHost *:80>
+# Configuration Apache Laravel
+RUN cat <<EOF > /etc/apache2/sites-available/000-default.conf
+<VirtualHost *:80>
     DocumentRoot /var/www/html/public
 
     <Directory /var/www/html/public>
@@ -43,13 +45,11 @@ RUN echo '<VirtualHost *:80>
         Require all granted
     </Directory>
 
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+    ErrorLog \${APACHE_LOG_DIR}/error.log
+    CustomLog \${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+EOF
 
-
-# Port Render
 EXPOSE 80
 
-# Démarrage : cache + migration + Apache
 CMD sh -c "php artisan config:clear && php artisan migrate --force && apache2-foreground"
