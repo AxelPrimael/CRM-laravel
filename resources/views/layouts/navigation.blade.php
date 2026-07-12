@@ -35,17 +35,13 @@
                 </a>
 
 
-                <a href="/roles"
-                   class="text-gray-700 hover:text-blue-600">
-                    Rôles
-                </a>
 
                 @endrole
 
 
 @can('contact.create')
     <a href="/contacts/create">
-        ➕ Ajouter un contact
+        Ajouter un contact
     </a>
 @endcan
 
