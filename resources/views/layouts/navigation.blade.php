@@ -1,10 +1,11 @@
 <nav class="bg-white border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         <div class="flex justify-between h-16">
 
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="{{ route('dashboard') }}" class="text-xl font-bold">
+                <a href="/dashboard" class="text-xl font-bold">
                     CRM Laravel
                 </a>
             </div>
@@ -13,40 +14,44 @@
             <!-- Menu -->
             <div class="flex items-center space-x-6">
 
-                <a href="{{ route('dashboard') }}"
+
+                <a href="/dashboard"
                    class="text-gray-700 hover:text-blue-600">
                     Dashboard
                 </a>
 
 
-                <a href="{{ route('contacts.index') }}"
+                <a href="/contacts"
                    class="text-gray-700 hover:text-blue-600">
                     Contacts
                 </a>
 
 
                 @role('Super Admin')
-                <a href="{{ route('users.index') }}"
+
+                <a href="/users"
                    class="text-gray-700 hover:text-blue-600">
                     Utilisateurs
                 </a>
 
-                <a href="{{ route('roles.index') }}"
+
+                <a href="/roles"
                    class="text-gray-700 hover:text-blue-600">
                     Rôles
                 </a>
+
                 @endrole
 
 
-                <!-- Profil -->
-                <a href="{{ route('profile.edit') }}"
-                   class="text-gray-700 hover:text-blue-600">
-                    Profil
-                </a>
+@can('contact.create')
+    <a href="/contacts/create">
+        ➕ Ajouter un contact
+    </a>
+@endcan
 
 
-                <!-- Déconnexion -->
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="/logout">
+
                     @csrf
 
                     <button type="submit"
@@ -56,8 +61,10 @@
 
                 </form>
 
+
             </div>
 
         </div>
+
     </div>
 </nav>

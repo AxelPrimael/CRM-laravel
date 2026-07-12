@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 @if(session('success'))
     <p style="color:green;">
         {{ session('success') }}
@@ -47,3 +51,5 @@
 <div style="margin-top:20px;">
     {{ $contacts->links() }}
 </div>
+
+@endsection

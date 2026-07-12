@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <h1>Modifier un contact</h1>
 
 <form method="POST" action="/contacts/{{ $contact->id }}" enctype="multipart/form-data">
@@ -43,4 +47,7 @@
     <br>
 
     <button type="submit">Mettre à jour</button>
+
 </form>
+
+@endsection

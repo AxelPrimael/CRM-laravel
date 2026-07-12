@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <h1>Ajouter un contact</h1>
 
 <form method="POST" action="/contacts" enctype="multipart/form-data">
@@ -39,6 +43,7 @@
 
 </form>
 
+
 <!-- JS PREVIEW IMAGE -->
 <script>
 function previewImage(event) {
@@ -55,3 +60,6 @@ function previewImage(event) {
     }
 }
 </script>
+
+
+@endsection
