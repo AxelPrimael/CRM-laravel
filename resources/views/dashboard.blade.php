@@ -391,11 +391,6 @@ Vous pouvez gérer les utilisateurs et les permissions.
 </div>
 
 
-
-
-
-<script>
-
 <script>
 const chartElement = document.getElementById('contactsChart');
 
