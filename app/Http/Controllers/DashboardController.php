@@ -28,10 +28,16 @@ class DashboardController extends Controller
         $phonesCount = Contact::whereNotNull('phone')->count();
 
         $latestContact = Contact::latest()->first();
+$contactsPerMonth = Contact::selectRaw("EXTRACT(MONTH FROM created_at) as month, COUNT(*) as total")
+    ->groupByRaw("EXTRACT(MONTH FROM created_at)")
+    ->orderByRaw("EXTRACT(MONTH FROM created_at)")
+    ->get()
+/*
 $contactsPerMonth = Contact::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
     ->groupBy('month')
     ->orderBy('month')
-    ->get()
+    ->get();
+*/
     ->map(function ($item) {
         $months = [
             1 => 'Jan',
