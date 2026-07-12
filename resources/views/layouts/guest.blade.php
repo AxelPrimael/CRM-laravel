@@ -15,31 +15,59 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
-            /* On applique le fond sur une classe dédiée pour plus de propreté */
             .bg-crm {
                 background-image: url("{{ asset('images/zoo.jpg') }}");
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
                 background-attachment: fixed;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px; /* Espace pour mobile */
+            }
+
+            /* Couleur et style du fond du formulaire */
+            .form-card {
+                /* Changez ici la couleur : rgba(R, G, B, Opacité) */
+                background-color: rgba(255, 255, 255, 0.9) !important; 
+                backdrop-filter: blur(10px); /* Effet de flou derrière le formulaire */
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            /* Adaptation pour le mode sombre si nécessaire */
+            @media (prefers-color-scheme: dark) {
+                .form-card {
+                    background-color: rgba(31, 41, 55, 0.9) !important;
+                }
             }
         </style>
     </head>
     <body class="font-sans text-gray-900 antialiased">
         
-        <!-- On enlève "bg-gray-100" et on ajoute notre classe "bg-crm" -->
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-crm">
+        <div class="min-h-screen bg-crm">
             
-            <!-- Logo (Optionnel) -->
-            <div class="mb-4">
-                <a href="/">
-                    <h1 class="text-white text-3xl font-bold shadow-sm">MON CRM</h1>
-                </a>
-            </div>
+            <!-- Conteneur responsive -->
+            <div class="w-full max-w-md mx-auto">
+                
+                <!-- Logo -->
+                <div class="flex justify-center mb-6">
+                    <a href="/">
+                        <h1 class="text-white text-4xl font-extrabold tracking-tight drop-shadow-lg">
+                            MON CRM
+                        </h1>
+                    </a>
+                </div>
 
-            <!-- Carte de connexion -->
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-xl overflow-hidden sm:rounded-lg border border-gray-200 dark:border-gray-700">
-                {{ $slot }}
+                <!-- Carte de connexion responsive -->
+                <div class="form-card w-full px-8 py-10 shadow-2xl rounded-2xl overflow-hidden">
+                    {{ $slot }}
+                </div>
+
+                <!-- Footer optionnel -->
+                <p class="text-center text-white text-sm mt-6 drop-shadow-md">
+                    &copy; {{ date('Y') }} - Tous droits réservés
+                </p>
             </div>
         </div>
 
