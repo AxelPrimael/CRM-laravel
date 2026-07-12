@@ -39,11 +39,11 @@
                 @endrole
 
 
-@can('contact.create')
+
     <a href="/contacts/create" class="text-gray-700 hover:text-blue-600">
         Ajouter un contact
     </a>
-@endcan
+
 
 
                 <form method="POST" action="/logout">
