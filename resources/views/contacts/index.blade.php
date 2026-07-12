@@ -9,11 +9,11 @@
 @endif
 <h1>Liste des contacts</h1>
 
-@can('contact.create')
+
     <a href="/contacts/create">
         ➕ Ajouter un contact
     </a>
-@endcan
+
 
 <hr>
 
