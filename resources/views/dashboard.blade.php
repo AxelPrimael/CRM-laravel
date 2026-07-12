@@ -396,34 +396,58 @@ Vous pouvez gérer les utilisateurs et les permissions.
 
 <script>
 
-const ctx = document
-.getElementById('contactsChart')
-.getContext('2d');
+<script>
+const chartElement = document.getElementById('contactsChart');
 
+if (chartElement) {
 
-new Chart(ctx, {
+    const ctx = chartElement.getContext('2d');
 
-type:'bar',
+    new Chart(ctx, {
 
-data:{
+        type: 'bar',
 
-labels:@json(collect($contactsPerMonth)->pluck('month')),
+        data: {
 
-datasets:[{
+            labels: @json(collect($contactsPerMonth)->pluck('month')),
 
-label:'Contacts',
+            datasets: [
+                {
+                    label: 'Contacts',
+                    data: @json(collect($contactsPerMonth)->pluck('total')),
+                    borderWidth: 2
+                }
+            ]
 
-data:@json(collect($contactsPerMonth)->pluck('total')),
+        },
 
-borderWidth:2
+        options: {
 
-}]
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+                    display: true
+                }
+
+            },
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true
+
+                }
+
+            }
+
+        }
+
+    });
 
 }
-
-});
-
-
 </script>
 
 
