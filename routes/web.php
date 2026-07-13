@@ -37,7 +37,8 @@ Route::middleware(['auth', 'check.status'])->group(function () {
     Route::middleware(['role:Super Admin'])->group(function () {
         // Gestion des utilisateurs
         Route::resource('users', UserController::class);
-        
+    Route::get('/users/{user}/permissions', [UserController::class, 'permissions']);
+Route::post('/users/{user}/permissions', [UserController::class, 'updatePermissions']);
         // Historique des activités
         Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
     });

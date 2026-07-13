@@ -167,7 +167,53 @@
                 <div class="error-message">{{ $message }}</div>
             @enderror
         </div>
+<hr style="border: 0; border-top: 1px solid #eee; margin: 25px 0;">
 
+<!-- PERMISSIONS -->
+<div class="form-group">
+
+    <label>
+        🔐 Permissions utilisateur
+    </label>
+
+
+    @foreach($permissions as $permission)
+
+        <div style="margin-bottom:10px;">
+
+            <label style="font-weight:normal;">
+
+                <input 
+                type="checkbox"
+                name="permissions[]"
+                value="{{ $permission->name }}"
+
+                {{ 
+                    $user->hasPermissionTo($permission->name)
+                    ? 'checked'
+                    : ''
+                }}
+
+                >
+
+                {{ $permission->name }}
+
+            </label>
+
+        </div>
+
+
+    @endforeach
+
+
+    @error('permissions')
+        <div class="error-message">
+            {{ $message }}
+        </div>
+    @enderror
+
+
+</div>
         <!-- STATUT -->
         <div class="form-group">
             <label for="status">Statut du compte</label>
